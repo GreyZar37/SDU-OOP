@@ -8,9 +8,7 @@ public class Inventory {
 
 
     public static ArrayList<Item> items;
-    Inventory(ArrayList<Item> _items){
-        items = _items;
-    }
+
     Inventory(){
         items = new ArrayList<>();
     }
@@ -18,8 +16,8 @@ public class Inventory {
     public static void main(String[] args) {
        Inventory inventory = new Inventory();
 
-         Item i1 = new FoodItem("Bread", 1.99, new Date(2023, Calendar.NOVEMBER,4));
-         Item i3 = new FoodItem("Fish", 2.99, new Date(2023, Calendar.JULY,15));
+         Item i1 = new FoodItem("Bread", 1.99, new Date(Calendar.YEAR, Calendar.NOVEMBER,Calendar.DATE));
+         Item i3 = new FoodItem("Fish", 2.99, new Date(2023, Calendar.JULY,Calendar.DATE));
 
          Item i2 = new NonFoodItem("Chair", 99.99, new String[]{"Wood", "Metal"});
          Item[] items = new Item[]{i1,i3, i2};
@@ -27,18 +25,17 @@ public class Inventory {
          for(Item item : items){
              addItem(item);
          }
-        printStatus(inventory);
-         System.out.println("Removing expired items..." + "\n");
+        printStatus();
+         System.out.println("Removing expired items...");
             inventory.removeExpiredItems();
             System.out.println("Done!"+ "\n");
-        printStatus(inventory);
+        printStatus();
     }
 
     public static void addItem(Item item){
         items.add(item);
     }
     public static void removeItem(Item item){
-        System.out.println("Removing " + item.getName() + "...");
         items.remove(item);
     }
     public static double getInventory(){
@@ -50,22 +47,26 @@ public class Inventory {
     }
     public static void printInventory(){
         for(Item item : items){
-            System.out.println(" - " + item.toString());
+            System.out.println(" - " + item.toString() + "\n");
         }
     }
 
-    public static void printStatus(Inventory _inventory){
+    public static void printStatus(){
         printInventory();
-        System.out.println("Total: " + _inventory.getInventory());
-        System.out.println("");
+        System.out.println("Total: " + getInventory() + "\n");
 
     }
 
     void removeExpiredItems(){
+
+        ArrayList<Item> toRemove = new ArrayList<>();
+
         for(Item item : items){
             if(item.isExpired()){
-                removeItem(item);
+                System.out.println("Removing " + item.getName() + "...");
+                toRemove.add(item);
             }
         }
+        items.removeAll(toRemove);
     }
 }
