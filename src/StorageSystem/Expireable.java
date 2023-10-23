@@ -1,2 +1,5 @@
-package StorageSystem;public interface Expireable {
+package StorageSystem;
+
+public interface Expireable {
+public boolean isExpired();
 }
