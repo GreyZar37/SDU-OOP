@@ -1,2 +1,4 @@
-package Abstract;public class Nic {
+package Abstract;
+
+public class Nic {
 }
