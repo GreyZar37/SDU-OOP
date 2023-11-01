@@ -1,7 +1,8 @@
 package Collections;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 
 public class DataBase {
@@ -41,5 +42,69 @@ public class DataBase {
 
 
 
+    }
+}
+
+class NondestructiveHashSet<T> extends HashSet<T> implements NondestructiveSet<T> {
+
+    @Override
+    public NondestructiveSet<T> intersection(NondestructiveSet<T> a, NondestructiveSet<T> b) {
+        NondestructiveHashSet<T> result = new NondestructiveHashSet<>();
+        result.addAll((Collection) a);
+        result.retainAll((Collection) b);
+
+
+        return result;
+    }
+
+    @Override
+    public NondestructiveSet<T> union(NondestructiveSet<T> a, NondestructiveSet<T> b) {
+        NondestructiveHashSet<T> result = new NondestructiveHashSet<>();
+        result.addAll((Collection) a);
+        result.addAll((Collection) b);
+
+        return result;
+    }
+
+    @Override
+    public NondestructiveSet<T> difference(NondestructiveSet<T> a, NondestructiveSet<T> b) {
+        NondestructiveHashSet<T> result = new NondestructiveHashSet<>();
+        result.addAll((Collection) a);
+        result.removeAll((Collection) b);
+
+        return result;
+    }
+}
+    interface NondestructiveSet <T> {
+
+        Collections.NondestructiveSet<T> intersection(Collections.NondestructiveSet<T> a, Collections.NondestructiveSet<T> b);
+        Collections.NondestructiveSet<T> union(Collections.NondestructiveSet<T> a, Collections.NondestructiveSet<T> b);
+        Collections.NondestructiveSet<T> difference(Collections.NondestructiveSet<T> a, Collections.NondestructiveSet<T> b);
+
+
+
+    }
+ class Person {
+    public String name, cpr;
+    public int age;
+
+    Person(String name, String cpr, int age){
+        this.name = name;
+        this.cpr = cpr;
+        this.age = age;
+    }
+
+    public String getName(){
+        return name;
+    }
+    public String getCpr(){
+        return cpr;
+    }
+    public int getAge(){
+        return age;
+    }
+    @Override
+    public String  toString(){
+        return ("Name: " + getName() + "\nCPR: " + getCpr() + "\nAge: " + getAge());
     }
 }
