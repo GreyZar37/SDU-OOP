@@ -1,6 +1,12 @@
-package StorageSystemNew;
+package StorageSystemNew.data;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class FileBckend {
+
+public class FileBackend {
 
     String filename;
     public FileBackend (String filename) {
@@ -21,7 +27,6 @@ public class FileBckend {
     }
     public List<String> load () {
         List<String> entries = new ArrayList<String>();
-        63
         try {
             File file = new File(filename);
             Scanner scanner = new Scanner(file);

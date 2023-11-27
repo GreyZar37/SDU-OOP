@@ -1,4 +1,4 @@
-package StorageSystemNew;
+package StorageSystemNew.domain;
 import java.util.Comparator;
 
 class ItemNameLengthComparator implements Comparator<Item> {
@@ -7,3 +7,4 @@ class ItemNameLengthComparator implements Comparator<Item> {
         return i1.getName().length() - i2.getName().length();
     }
 }
+
